@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>💌 Một lời muốn hỏi</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- MathJax -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+
+    <script
+        defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+
+    <!-- math.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjs@14.0.1/lib/browser/math.js"></script>
+
+    <!-- CSS của chúng ta -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Canvas dùng để tạo pháo hoa -->
+    <canvas id="fireworksCanvas"></canvas>
+
+    <!-- Những trái tim bay phía sau -->
+    <div id="hearts"></div>
+
+    <!-- Nội dung chính -->
+    <main class="main-container">
+
+        <!-- Tiêu đề -->
+        <div class="title-area">
+
+            <p class="small-title">
+                💌 Một chiếc thiệp nhỏ
+            </p>
+
+            <h1>
+                Có một điều muốn hỏi...
+            </h1>
+
+            <p id="hint">
+                Ấn vào phong bì để mở thiệp nhé!
+            </p>
+
+        </div>
+
+
+        <!-- Phong bì -->
+        <div class="envelope-wrap">
+
+            <div id="envelope"
+                 class="envelope"
+                 title="Ấn để mở thiệp">
+
+                <!-- Phần thân phong bì -->
+                <div class="envelope-body"></div>
+
+
+                <!-- Lá thư -->
+                <div class="letter">
+
+                    <div class="letter-heart">
+                        💗
+                    </div>
+
+                    <p class="letter-small">
+                        Một câu hỏi rất đơn giản...
+                    </p>
+
+                    <h2>
+                        Em có đồng ý làm người yêu anh không?
+                    </h2>
+
+                    
+
+                </div>
+
+
+                <!-- Nắp phong bì -->
+                <div class="flap"></div>
+
+
+                <!-- Con dấu trái tim -->
+                <div class="seal">
+                    ♥
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Khu vực lựa chọn -->
+        <div id="answerArea"
+             class="answer-area">
+
+            <button id="yesBtn"
+                    class="yes-button">
+
+                ❤️ Có
+
+            </button>
+
+
+            <button id="noBtn"
+                    class="no-button">
+
+                💔 Không
+
+            </button>
+
+        </div>
+
+
+        <!-- Kết quả -->
+        <div id="result"></div>
+
+    </main>
+
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>

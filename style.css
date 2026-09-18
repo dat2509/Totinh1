@@ -1,0 +1,735 @@
+/* Xóa khoảng cách mặc định */
+* {
+    box-sizing: border-box;
+}
+
+
+/* Toàn bộ trang */
+body {
+    margin: 0;
+
+    overflow: hidden;
+
+    font-family: Arial, sans-serif;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #ffe4ef 0%,
+            #ffd1e3 35%,
+            #f9a8d4 100%
+        );
+}
+
+
+/* Canvas pháo hoa */
+#fireworksCanvas {
+    position: fixed;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+
+    z-index: 50;
+}
+
+
+/* Khu vực trái tim */
+#hearts {
+    position: fixed;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+}
+
+
+/* Trái tim bay */
+.heart {
+    position: absolute;
+
+    animation-name: floatHeart;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+
+    opacity: 0.65;
+}
+
+
+/* Animation trái tim */
+@keyframes floatHeart {
+
+    from {
+        transform:
+            translateY(110vh)
+            rotate(0deg);
+    }
+
+    to {
+        transform:
+            translateY(-15vh)
+            rotate(360deg);
+    }
+}
+
+
+/* Phần chứa phong bì */
+.envelope-wrap {
+    display: flex;
+
+    justify-content: center;
+
+    perspective: 1200px;
+}
+
+
+/* Phong bì */
+.envelope {
+    position: relative;
+
+    width: 360px;
+    max-width: 85vw;
+
+    height: 240px;
+
+    transform-style: preserve-3d;
+
+    transition: transform 1s ease;
+
+    cursor: pointer;
+}
+
+
+/* Khi phong bì mở */
+.envelope.opened {
+    transform: translateY(45px);
+}
+
+
+/* Thân phong bì */
+.envelope-body {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fb7185,
+            #ec4899
+        );
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 25px 50px
+        rgba(190, 24, 93, 0.3);
+
+    overflow: hidden;
+}
+
+
+/* Tam giác trang trí bên trái */
+.envelope-body::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 0;
+
+    border-style: solid;
+
+    border-width:
+        120px
+        180px
+        0
+        0;
+
+    border-color:
+        rgba(255,255,255,0.18)
+        transparent
+        transparent
+        transparent;
+}
+
+
+/* Tam giác trang trí bên phải */
+.envelope-body::after {
+
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 0;
+
+    border-style: solid;
+
+    border-width:
+        120px
+        0
+        0
+        180px;
+
+    border-color:
+        rgba(255,255,255,0.12)
+        transparent
+        transparent
+        transparent;
+}
+
+
+/* Nắp phong bì */
+.flap {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 130px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f43f5e,
+            #db2777
+        );
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            50% 100%
+        );
+
+    transform-origin: top center;
+
+    transition:
+        transform 1s ease;
+
+    z-index: 5;
+}
+
+
+/* Nắp mở */
+.envelope.opened .flap {
+
+    transform:
+        rotateX(180deg);
+
+    z-index: 1;
+}
+
+
+/* Lá thư */
+.letter {
+    position: absolute;
+
+    left: 7%;
+    bottom: 5px;
+
+    width: 86%;
+    height: 205px;
+
+    background: #fffafc;
+
+    border-radius: 12px;
+
+    padding:
+        25px
+        20px;
+
+    text-align: center;
+
+    transition:
+        transform 1.2s ease;
+
+    z-index: 3;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,0.12);
+}
+
+
+/* Lá thư trượt lên */
+.envelope.opened .letter {
+
+    transform:
+        translateY(-150px);
+}
+
+
+/* Trái tim trong thư */
+.letter-heart {
+
+    font-size: 40px;
+
+    margin-bottom: 5px;
+}
+
+
+/* Dòng nhỏ */
+.letter-small {
+
+    color: #9ca3af;
+
+    font-size: 14px;
+
+    margin: 5px;
+}
+
+
+/* Câu hỏi */
+.letter h2 {
+
+    color: #e11d48;
+
+    font-size: 22px;
+
+    line-height: 1.5;
+
+    margin: 5px 0;
+}
+
+
+/* Công thức MathJax */
+.math-text {
+
+    color: #f472b6;
+
+    font-size: 14px;
+
+    margin-top: 8px;
+}
+
+
+/* Con dấu */
+.seal {
+
+    position: absolute;
+
+    z-index: 10;
+
+    left: 50%;
+    top: 52%;
+
+    transform:
+        translate(-50%, -50%);
+
+    width: 58px;
+    height: 58px;
+
+    border-radius: 50%;
+
+    background: #be123c;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+
+    font-size: 27px;
+
+    box-shadow:
+        0 6px 15px
+        rgba(0,0,0,0.2);
+
+    transition:
+        opacity 0.4s;
+}
+
+
+/* Khi mở thì con dấu biến mất */
+.envelope.opened .seal {
+
+    opacity: 0;
+}
+
+
+/* Khu vực nút */
+.answer-area {
+
+    margin-top: 50px;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 16px;
+
+    flex-wrap: wrap;
+
+    opacity: 0;
+
+    transform:
+        translateY(20px);
+
+    pointer-events: none;
+
+    transition:
+        all 0.7s ease;
+}
+
+
+/* Hiện nút */
+.answer-area.show {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+
+    pointer-events: auto;
+}
+
+
+/* Nút Có */
+.yes-button {
+
+    background: #ec4899;
+
+    color: white;
+
+    border: none;
+
+    font-weight: bold;
+
+    font-size: 17px;
+
+    padding:
+        12px
+        32px;
+
+    border-radius: 999px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px
+        rgba(236,72,153,0.25);
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+
+/* Hover nút Có */
+.yes-button:hover {
+
+    transform:
+        scale(1.07);
+
+    box-shadow:
+        0 10px 25px
+        rgba(236,72,153,0.35);
+}
+
+
+/* Nút Không */
+.no-button {
+
+    background: white;
+
+    color: #f43f5e;
+
+    border:
+        1px solid #fbcfe8;
+
+    font-weight: bold;
+
+    font-size: 17px;
+
+    padding:
+        12px
+        32px;
+
+    border-radius: 999px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px
+        rgba(0,0,0,0.08);
+
+    transition:
+        all 0.25s ease;
+}
+
+
+/* Kết quả */
+#result {
+
+    margin-top: 28px;
+
+    min-height: 80px;
+
+    display: flex;
+
+    justify-content: center;
+}
+
+
+/* Hộp chúc mừng */
+.success {
+
+    background:
+        rgba(255,255,255,0.85);
+
+    backdrop-filter:
+        blur(10px);
+
+    border-radius: 25px;
+
+    padding: 25px 40px;
+
+    box-shadow:
+        0 15px 40px
+        rgba(190,24,93,0.2);
+}
+
+
+/* Animation chúc mừng */
+.success {
+
+    animation:
+        successPop 0.7s ease;
+}
+
+
+@keyframes successPop {
+
+    0% {
+
+        transform:
+            scale(0.5);
+
+        opacity: 0;
+    }
+
+    70% {
+
+        transform:
+            scale(1.08);
+    }
+
+    100% {
+
+        transform:
+            scale(1);
+
+        opacity: 1;
+    }
+}
+
+
+/* Tiêu đề */
+.main-container {
+
+    position: relative;
+
+    z-index: 10;
+
+    width: 100%;
+
+    max-width: 700px;
+
+    padding: 20px;
+
+    margin: auto;
+
+    text-align: center;
+}
+
+
+.title-area {
+    margin-bottom: 25px;
+}
+
+
+.small-title {
+
+    color: #be185d;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    font-size: 14px;
+}
+
+
+.title-area h1 {
+
+    color: #be123c;
+
+    font-size: 36px;
+
+    margin: 8px 0;
+}
+
+
+.title-area #hint {
+
+    color: #be185d;
+
+    margin-top: 5px;
+}
+
+
+/* Bong bóng */
+.balloon {
+
+    position: fixed;
+
+    bottom: -130px;
+
+    width: 55px;
+    height: 70px;
+
+    border-radius:
+        50%
+        50%
+        45%
+        45%;
+
+    z-index: 60;
+
+    animation:
+        balloonUp 5s ease-in forwards;
+
+    pointer-events: none;
+}
+
+
+/* Dây bong bóng */
+.balloon::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 1px;
+    height: 100px;
+
+    background:
+        rgba(60,60,60,0.5);
+
+    left: 50%;
+    top: 68px;
+}
+
+
+/* Bong bóng bay */
+@keyframes balloonUp {
+
+    0% {
+
+        transform:
+            translateY(0)
+            rotate(-5deg);
+
+        opacity: 1;
+    }
+
+    100% {
+
+        transform:
+            translateY(-125vh)
+            rotate(12deg);
+
+        opacity: 0.85;
+    }
+}
+
+
+/* Confetti */
+.confetti {
+
+    position: fixed;
+
+    top: -15px;
+
+    width: 10px;
+    height: 16px;
+
+    z-index: 70;
+
+    animation:
+        confettiFall 4s linear forwards;
+
+    pointer-events: none;
+}
+
+
+/* Confetti rơi */
+@keyframes confettiFall {
+
+    to {
+
+        transform:
+            translateY(110vh)
+            rotate(720deg);
+
+        opacity: 0;
+    }
+}
+
+
+/* Responsive cho điện thoại */
+@media (max-width: 500px) {
+
+    .title-area h1 {
+
+        font-size: 28px;
+    }
+
+    .envelope {
+
+        height: 210px;
+    }
+
+    .letter {
+
+        height: 180px;
+
+        padding: 18px 10px;
+    }
+
+    .letter h2 {
+
+        font-size: 18px;
+    }
+
+    .envelope.opened .letter {
+
+        transform:
+            translateY(-125px);
+    }
+}
